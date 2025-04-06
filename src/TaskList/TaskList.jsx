@@ -8,7 +8,7 @@ const TaskList = () => {
             </div>
 
         {
-            [1,1,1,1,1,1,1,1,1].map((item)=><TaskCard/>)
+            [1].map((item)=><TaskCard/>)
         }
       
     </div>
