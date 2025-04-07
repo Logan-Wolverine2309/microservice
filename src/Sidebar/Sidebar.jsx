@@ -58,7 +58,7 @@ const Sidebar = () => {
             </p>)
                 
         }
-        <Button onClick={handleLogout} sx={{padding:".7rem",borderRadius:"2rem"}} fullWith className='logoutButton'>
+        <Button onClick={handleLogout} sx={{padding:".7rem",borderRadius:"2rem"}}fullWidth className='logoutButton'>
             Logout
         </Button>
     

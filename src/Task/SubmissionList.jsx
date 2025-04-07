@@ -8,11 +8,11 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 300,
+  width: 500,
   bgcolor: 'background.paper',
   border: '2px solid #fff',
   boxShadow: 24,
-  p: 2,
+  p: 4,
 };
 
 const Submission=[1,1]
