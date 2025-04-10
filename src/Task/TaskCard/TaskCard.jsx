@@ -55,8 +55,8 @@ const TaskCard = () => {
 
   return (
     <div>
-      <div className='card lg:flex justify-between fixed w-[72vw] top-1/12'>
-        <div className='lg:flex gap-5 items-center spy-y-2 w-[90%] lg:w-[90%]'>
+      <div className='card lg:flex justify-between fixed w-[70vw] top-1/12 left-95 p-4 gap-5'>
+        <div className='lg:flex gap-5 items-center spy-y-2 w-[90%] lg:w-[70%]'>
             <div className=''>
              <img className='lg:w-[7rem] lg:h-[7rem] object cover' 
            src='https://images.pexels.com/photos/164634/pexels-photo-164634.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1'
