@@ -1,155 +1,170 @@
-import React, { useState } from 'react';
-import {
-  Autocomplete,
-  Box,
-  Button,
-  Grid,
-  Modal,
-  TextField,
-} from '@mui/material';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import * as React from 'react';
+import { useState } from 'react';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import { Autocomplete, Button, Grid, inputAdornmentClasses, TextField } from '@mui/material';
+import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import dayjs from 'dayjs';
 
 const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: 600,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
+  outline: "none",
   boxShadow: 24,
   p: 4,
 };
 
-const tags = [
-  "Angular", "React", "Vue", "JavaScript", "Python", "Java",
-  "C++", "C#", "PHP", "Ruby", "Swift", "Go",
-  "Kotlin", "Dart", "TypeScript", "HTML", "CSS"
-];
-
-export default function CreateNewTaskForm({ open, handleClose }) {
-  const [formData, setFormData] = useState({
-    title: "",
-    image: "",
-    description: "",
-    tag: [],
-    deadline: dayjs(),
+const tags = ["Angular", "React", "Vue", "JavaScript", "Python", "Java", "C++", "C#", "PHP", "Ruby", "Swift", "Go", "Kotlin", "Dart", "TypeScript", "HTML", "CSS"];
+export default function CreateNewTaskForm({handleClose, open}) {
+  const [formData, setFormData] =useState({
+    title:"",
+    image:"",
+    description:"",
+    tags:"",
+    deadline: new Date(),
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
+  const [selectedTags, setSelectedTags] = useState([]);
 
-  const handleTagsChange = (event, value) => {
-    setFormData(prev => ({
-      ...prev,
-      tag: value
-    }));
-  };
 
-  const handleDeadlineChange = (value) => {
-    setFormData(prev => ({
-      ...prev,
-      deadline: value
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const submissionData = {
+  const handleChange=(e)=>{
+    const {name, value}=e.target;
+    setFormData({
       ...formData,
-      deadline: formData.deadline.toISOString()
-    };
+      [name]: value
+    });
+  };
+  const handleTagsChange=(event,value)=>{
+    setSelectedTags(value);
+  };
 
-    console.log("Submitted Data:", submissionData);
+  const handleDeadlineChange=(date)=>{
+    setFormData({
+      ...formData,
+      deadline: date
+    });
+
+  }
+
+  const formateDate = (input) => {
+    let {
+      $y: year,
+      $M: month,
+      $D: day,
+      $H: hours,
+      $m: minutes,
+      $s: seconds,
+      $ms: milliseconds,
+      }  =input;
+
+      
+      const date=new Date(year, month, day, hours, minutes, seconds, milliseconds);
+
+      const formatedDate = date.toISOString();
+      return formatedDate;
+
+  }
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    const {deadline}=formData;
+    formData.deadline=formateDate(deadline);
+    formData.tags=selectedTags;
+    console.log("formData".formData,"deadline : ",formData.deadline);
     handleClose();
   };
 
+
   return (
-    <Modal
-      open={open}
-      onClose={handleClose}
-      aria-labelledby="create-task-modal-title"
-    >
-      <Box sx={style}>
-        <form onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
+    <div>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+        <form onSubmit={handleSubmit} >
+          <Grid container spacing={2} alignItems="center">
             <Grid item xs={12}>
               <TextField
-                label="Title"
-                name="title"
-                value={formData.title}
-                onChange={handleChange}
-                fullWidth
+              label="Title"
+              fullWidth
+              name='title'
+              value={formData.title}
+              onChange={handleChange}
+              /> 
+              </Grid>
+
+              <Grid container spacing={2} alignItems="center">
+            <Grid item xs={12}>
+              <TextField
+              label="Image "
+              fullWidth
+              name='image'
+              value={formData.image}
+              onChange={handleChange}
+              /> 
+              </Grid>
+
+              <Grid item xs={12}>
+              <TextField
+              label="Description"
+              fullWidth
+              name='description'
+              value={formData.description}
+              onChange={handleChange}
               />
             </Grid>
 
-            <Grid item xs={12}>
-              <TextField
-                label="Image URL"
-                name="image"
-                value={formData.image}
-                onChange={handleChange}
-                fullWidth
-              />
-            </Grid>
 
-            <Grid item xs={12}>
-              <TextField
-                label="Description"
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-                fullWidth
-              />
-            </Grid>
 
-            <Grid item xs={12}>
+             <Grid item xs={12} pt-2>
               <Autocomplete
-                multiple
-                options={tags}
-                value={formData.tag}
-                onChange={handleTagsChange}
-                renderInput={(params) => (
-                  <TextField {...params} label="Tags" fullWidth />
-                )}
+              multiple
+              id='multiple-limit-tags'
+              options={tags}
+              onChange={handleTagsChange}
+              getOptionLabel={(option) => option}
+              renderInput={(params) => <TextField
+                label="Tags"
+                fullWidth
+                {...params}
+               />}
+              
               />
             </Grid>
 
             <Grid item xs={12}>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DateTimePicker
-                  label="Deadline"
-                  value={formData.deadline}
-                  onChange={handleDeadlineChange}
-                  renderInput={(params) => (
-                    <TextField {...params} fullWidth />
-                  )}
-                />
-              </LocalizationProvider>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DateTimePicker onChange={handleDeadlineChange}
+                        className="w-full" 
+                        label="Deadline"
+                        renderInput={(params)=><TextField {...params} />}
+                        />
+            </LocalizationProvider>
             </Grid>
 
             <Grid item xs={12}>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ padding: ".9rem" }}
-              >
-                Create
-              </Button>
+            <Button fullWidth
+            className="custom-button"
+            type="submit"
+            variant="contained"
+            sx={{padding: ".9rem"}}>
+              Create 
+            </Button>
             </Grid>
+
+           
+          </Grid>
           </Grid>
         </form>
-      </Box>
-    </Modal>
+          
+        </Box>
+      </Modal>
+    </div>
   );
 }

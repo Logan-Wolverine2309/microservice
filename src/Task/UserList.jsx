@@ -9,13 +9,14 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 400,
-  bgcolor: 'background.paper',
+  bgcolor: '',
+  
   outline:"none",
-  boxShadow: 24,
-  p: 2,
+  // boxShadow: 24,
+  p: 4,
 };
 
-const tasks=[1]
+const tasks=[1,1,1,1]
 export default function UserList({handleClose, open}) {
  
 
@@ -35,7 +36,9 @@ export default function UserList({handleClose, open}) {
                 <div>
                   <ListItem>
                     <ListItemAvatar>
-                      <Avatar src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCQ61aOdEt06K7-Bi7CncJrfcUTwAK9vdsww&s' />
+                      <Avatar 
+                      className='border-2 border-[#c24ddd0]'
+                      src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCQ61aOdEt06K7-Bi7CncJrfcUTwAK9vdsww&s' />
                     </ListItemAvatar>
                     <ListItemText
                       secondary="@flow_state"

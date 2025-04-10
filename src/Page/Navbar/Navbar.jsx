@@ -1,21 +1,25 @@
-import { Avatar } from '@mui/material'
-import React from 'react'
-import "./Navbar.css"
+import { Avatar } from '@mui/material';
+import React from 'react';
+import "./Navbar.css";
+
 const Navbar = () => {
   return (
-    <div className='container z-10 sticky left-0 right-0 top-0 py-3 px-5 lg:px-10 flex-row justify-between items-center '>
-        
+    <div class="h-14 flex justify-between items-center px-4 bg-gradient-to-r from-purple-500 to-violet-600 text-white shadow">
+    
       
-      <p className='font-bold text-lg'>Flow State</p>
-
-      <div className='w-full flex justify-between items-center gap-3'>
-        <p>Work to do</p>
-        <Avatar src="https://png.pngtree.com/png-vector/20191110/ourmid/pngtree-avatar-icon-profile-icon-member-login-vector-isolated-png-image_1978396.jpg" >J</Avatar>
+      {/* Left Side */}
+      <div>
+        <p className='font-bold text-lg'>Flow State</p>
       </div>
 
-        
+      {/* Right Side */}
+      <div className='flex items-center gap-2'>
+        <p>Work to do</p>
+        <Avatar src="https://png.pngtree.com/png-vector/20191110/ourmid/pngtree-avatar-icon-profile-icon-member-login-vector-isolated-png-image_1978396.jpg" />
+      </div>
+
     </div>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;
