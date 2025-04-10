@@ -57,12 +57,12 @@ const Sidebar = () => {
 
     return (
         <>
-            <div className='card min-h[85vh] flex flex-col justify-center fixed w-[20vw] gap-5'>
-                <div className='space-y-6 h-full'>
+            <div className='card min-h[85vh] flex flex-col justify-between-center fixed w-[20vw] top-1/12 left-15 p-4 gap-5'>
+                <div className='space-y-5 h-full'>
                     <div className='flex justify-center'>
                         <Avatar
-                            sx={{ width: "7rem", height: "7rem" }}
-                            className='border-2 border-[#c24ddd0]'
+                            sx={{ width: "8rem", height: "8rem" }}
+                            className='border-2 border-[#c24dd0]'
                             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCQ61aOdEt06K7-Bi7CncJrfcUTwAK9vdsww&s"
                         />
                     </div>
@@ -70,10 +70,10 @@ const Sidebar = () => {
                         menu.filter((item) => item.role.includes("ROLE_ADMIN"))
                             .map((item) => (
                                 <p
-                                    key={item.name} // Added key prop
+                                    key={item.name} 
                                     onClick={() => handleMenuChange(item)}
-                                    className={`py-3 px-5 rounded-full text-center cursor-pointer 
-                                        ${activeMenu === item.name ? "activeMenuItem" : "menuItem"}`}
+                                    className={`py-4 px-6 rounded-full text-center cursor-pointer 
+                                        ${activeMenu === item.name? "activeMenuItem" : "menuItem"}`}
                                 >
                                     {item.name}
                                 </p>
@@ -81,7 +81,7 @@ const Sidebar = () => {
                     }
                     <Button
                         onClick={handleLogout}
-                        sx={{ padding: ".7rem", borderRadius: "2rem" }}
+                        sx={{ padding: ".1rem", borderRadius: "2rem" }}
                         fullWidth
                         className='logoutButton'
                     >

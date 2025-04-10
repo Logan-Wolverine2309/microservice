@@ -14,7 +14,7 @@ return(
 
     {user? <div>
       <Navbar />
-    <Home /> 
+    <Home/> 
 
     </div>: <Auth /> }
       

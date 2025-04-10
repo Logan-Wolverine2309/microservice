@@ -18,7 +18,11 @@ const style = {
   p: 4,
 };
 
-const tags = ["Angular", "React", "Vue", "JavaScript", "Python", "Java", "C++", "C#", "PHP", "Ruby", "Swift", "Go", "Kotlin", "Dart", "TypeScript", "HTML", "CSS"];
+const tags = ["Angular", "React", "Vue",
+   "JavaScript", "Python", "Java", "C++", 
+   "C#", "PHP", "Ruby", "Swift", "Go", "Kotlin", 
+   "Dart", "TypeScript", "HTML", "CSS"];
+
 export default function CreateNewTaskForm({handleClose, open}) {
   const [formData, setFormData] =useState({
     title:"",
@@ -122,7 +126,7 @@ export default function CreateNewTaskForm({handleClose, open}) {
 
 
 
-             <Grid item xs={12} pt-2>
+             <Grid item  alignItems="center" xs={16} pt-8>
               <Autocomplete
               multiple
               id='multiple-limit-tags'
