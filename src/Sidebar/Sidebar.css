@@ -1,8 +1,10 @@
 .card {
     background-color: #0c071c;
     box-shadow: rgba(215, 106, 255, 0.507) 0px 0px 20px;
+    min-height: 85vh;
     
-    gap: 1.5rem;
+
+     gap: 1.5rem;
     padding: 2rem;
     border-radius: 5px;
 
@@ -14,7 +16,7 @@
 
 .activeMenuItem{
     background-image:  linear-gradient(150deg, #c24dd0, #7a72fa);
-    color: white;
+    color: white !important;
     border-radius: 5px; 
     text-align: center;
 }
@@ -29,6 +31,6 @@
 .customButton{
     background-image: linear-gradient(150deg, #c24dd0, #7a72fa);
     color: white !important;
-    border-radius: 8px; /* Add rounded corners */
+    border-radius: 8px; 
     text-align: center;
 }

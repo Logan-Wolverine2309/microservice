@@ -55,8 +55,8 @@ const TaskCard = () => {
 
   return (
     <div>
-      <div className='card lg:flex justify-between fixed w-[70vw] top-1/12 '>
-        <div className='lg:flex gap-5 items-center spy-y-2 w-[90%] lg:w-[70%]'>
+      <div className='fixed w-[70vw] top-[10%] bg-[#0c071c] shadow-[0_0_20px_rgba(215,106,255,0.5)]  p-8 rounded-md '>
+        <div className='lg:flex gap-5 items-center space-y-2 w-[90%] lg:w-[70%]'>
             <div className=''>
              <img className='lg:w-[7rem] lg:h-[7rem] object cover' 
            src='https://images.pexels.com/photos/164634/pexels-photo-164634.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1'
@@ -72,11 +72,9 @@ const TaskCard = () => {
 
             <div className='flex flex-wrap gap-2 items-center'>
 
-                {[1].map((item, index) => (
-                    <span key={index} className='py-1 px-5 rounded-full techtack'>
-                        Angular 
-                    </span>
-                ))}
+                {[1].map(() => <span className='py-1 px-5 rounded-full techtack'>
+                    Angular 
+                </span>)}
                 </div>
             </div>
         </div>
@@ -95,23 +93,20 @@ const TaskCard = () => {
         anchorEl={anchorEl}
         open={openMenu}
         onClose={handleMenuClose}
-        slotProps={{
-          list: {
-            'aria-labelledby': 'basic-button',
-          },
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
         }}>
       
         
         {
-          role === "ROLE_ADMIN" && (
-            <>
-              <MenuItem onClick={handleOpenUserList}>Assined User</MenuItem>
-              <MenuItem onClick={handleOpenSubmissionList}>See Submissions</MenuItem>
-              <MenuItem onClick={handleOpenUpdateTaskModel}>Edit</MenuItem>
-              <MenuItem onClick={handleDeleteTask}>Delete</MenuItem>
-            </>
-          )
-        }
+          role==="ROLE_ADMIN" ? <>
+          <MenuItem  onClick={handleOpenUserList}>Assined User</MenuItem>
+          <MenuItem onClick={handleOpenSubmissionList}>See Submissions</MenuItem>
+          <MenuItem onClick={handleOpenUpdateTaskModel}>Edit</MenuItem>
+          <MenuItem onClick={handleDeleteTask}>Delete</MenuItem>
+          </> : (
+          <></>
+        )}
         </Menu>
        
       

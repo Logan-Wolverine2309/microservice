@@ -4,14 +4,12 @@ import "./Navbar.css";
 
 const Navbar = () => {
   return (
-    <div className="container z-10 sticky left-0 right-0 top-0 py-3 px-5 lg:px-10 flex justify-between items-center">
+    <div className="container z-10 sticky left-0 right-0 top-0 py-3 px-5 lg:px-10 flex justify-between items-center ">
     
       
       
       <div>
-        <p className='font-bold text-lg:4xl'>
-          Flow State
-          </p>
+        <p className='font-bold text-lg-4xl text-right'> Flow State </p>
       </div>
 
   
