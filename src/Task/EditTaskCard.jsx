@@ -2,9 +2,12 @@ import * as React from 'react';
 import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import { Autocomplete, Button, Grid, inputAdornmentClasses, TextField } from '@mui/material';
+import { Autocomplete, Button, Grid, TextField } from '@mui/material';
 import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchTasksById, updatedTask } from '../ReduxToolkit/TaskSlice';
+import { useLocation } from 'react-router-dom';
 
 const style = {
   position: 'absolute',
@@ -18,8 +21,14 @@ const style = {
   p: 4,
 };
 
-const tags = ["Angular", "React", "Vue", "JavaScript", "Python", "Java", "C++", "C#", "PHP", "Ruby", "Swift", "Go", "Kotlin", "Dart", "TypeScript", "HTML", "CSS"];
-export default function EditTaskForm({handleClose, open}) {
+const tags = ["Angular", "React", "Vuejs", "JavaScript", "Python", "Java", "C++", "C#", "PHP", "Ruby", "Swift", "Go", "Kotlin", "Dart", "TypeScript", "HTML", "CSS"];
+
+export default function EditTaskForm({item, handleClose, open}) {
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const queryParams= new URLSearchParams(location.search);
+  const taskId= queryParams.get("taskId");
+  const { task } = useSelector(store=>store);
   const [formData, setFormData] =useState({
     title:"",
     image:"",
@@ -74,12 +83,19 @@ export default function EditTaskForm({handleClose, open}) {
     formData.deadline=formateDate(deadline);
     formData.tags=selectedTags;
     console.log("formData".formData,"deadline : ",formData.deadline);
+    dispatch(updatedTask({ id:taskId, updatedTaskData: formData }));
     handleClose();
   };
 
   React.useEffect(()=>{
+dispatch(fetchTasksById(taskId))
+  },[taskId]);
 
-  },[])
+  React.useEffect(()=>{
+    if(task.taskDetails)setFormData(task.taskDetails)
+  }, 
+[task.taskDetails]
+);
 
   return (
     <div>

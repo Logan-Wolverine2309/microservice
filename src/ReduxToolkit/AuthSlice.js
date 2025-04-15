@@ -29,7 +29,7 @@ export const register = createAsyncThunk("auth/register", async (userData) => {
     console.log("catch error", error);
     throw Error(error.response.data.error)
     }
-})
+});
 
 export const logout = createAsyncThunk("auth/logout", async (userData) => {
     try {

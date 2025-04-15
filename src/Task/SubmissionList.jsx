@@ -2,6 +2,9 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import SubmissionCard from './SubmissionCard';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchSubmissionsByTaskId } from '../ReduxToolkit/SubmissionSlice';
+import { useLocation } from 'react-router-dom';
 
 const style = {
   position: 'absolute',
@@ -15,9 +18,23 @@ const style = {
   p: 4,
 };
 
-const Submission=[1,1]
+const Submission=[1,1,1];
 export default function SubmissionList({handleClose, open}) {
- 
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const taskId = queryParams.get('taskId');
+  const { Submissions } = useSelector(store => store); 
+
+
+  React.useEffect(()=>{
+    if(taskId){
+      dispatch(fetchSubmissionsByTaskId(taskId))
+    }
+  },[taskId])
+
+
+  console.log("submissions ", Submissions);
 
   return (
     <div>
@@ -29,11 +46,18 @@ export default function SubmissionList({handleClose, open}) {
       >
         <Box sx={style}>
           <div>
-            {Submission.length>0?<div className='space-y-2'>
-              {Submission.map((item) =><SubmissionCard/> )}
-            </div>: <div className=''>
+            {Submission.Submissions.length> 0? (
+            <div className='space-y-2'>
+              {Submission.Submissions.map((item) => (
+              <SubmissionCard item= {item} /> 
+            ))}
+            </div> 
+            ) : ( 
+            <div className=''>
             <div className='text-center'> No Submission Found</div>
-            </div>}
+            </div>
+            )}
+            
           </div>
           
         </Box>

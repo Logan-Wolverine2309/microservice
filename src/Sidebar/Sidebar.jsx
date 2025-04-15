@@ -4,6 +4,7 @@ import "./Sidebar.css"
 import { Button } from '@mui/material'
 import CreateNewTaskForm from '../Task/CreateTask';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 
 const menu = [
@@ -21,6 +22,7 @@ const role = "ROLE_ADMIN";
 const Sidebar = () => {
     const location=useLocation();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [activeMenu, setActiveMenu] = useState("DONE");
     const [openCreateTaskForm, setOpenCreateTaskForm] = useState(false);
 
@@ -48,14 +50,14 @@ const Sidebar = () => {
         }
         else{
             updatedParams.set("filter",item.value);
-            navigate(`${location.pathname}?${updatedParams.toString}`);
+            navigate(`${location.pathname}?${updatedParams.toString()}`);
         }
         setActiveMenu(item.name);
     };
 
     const handleLogout = () => {
-        localStorage.removeItem("user");
-        console.log("handleLogout");
+        dispatch(logout());
+        console.log("handle Logout");
     };
 
     return (
